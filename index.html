@@ -27,7 +27,7 @@ body:not([data-route="home"]) .cover{opacity:0;visibility:hidden;pointer-events:
 .cover .static,.cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cover .static{z-index:0}.cover video{z-index:1}.cover .yt-bg{position:absolute;top:50%;left:50%;z-index:1;width:100vw;height:56.25vw;min-width:177.78vh;min-height:100vh;transform:translate(-50%,-50%);border:0;pointer-events:none;filter:grayscale(1) contrast(1.06) brightness(1.08)}.cover.has-youtube #bg{display:none}
 .static canvas{width:100%;height:100%;display:block;opacity:.5}
-.cover:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,.06),rgba(0,0,0,.46))}
+.cover:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,.02),rgba(0,0,0,.34))}
 
 #cursorCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none;mix-blend-mode:screen}
 body:not([data-route="home"]) #cursorCanvas{display:none}
@@ -46,7 +46,7 @@ body:not([data-route="home"]) #cursorCanvas{display:none}
 body:not([data-route="home"]) .light-dot{display:none}
 @media(hover:none){#cursorCanvas,.light-dot{display:none}html,body{cursor:auto}}
 
-.node{position:absolute;z-index:5;background:none;border:none;width:42px;height:42px;display:grid;place-items:center;mix-blend-mode:difference;opacity:.34;transition:opacity .55s ease}
+.node{position:absolute;z-index:5;background:none;border:none;width:54px;height:54px;display:grid;place-items:center;mix-blend-mode:normal;opacity:.92;transition:opacity .55s ease;filter:drop-shadow(0 0 10px rgba(236,234,230,.55))}
 .scar{width:34px;height:auto;overflow:visible;animation:pulse 4.6s ease-in-out infinite;transform:rotate(var(--rot,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .scar .wound{fill:#020202;stroke:var(--ink);stroke-width:1;transform:scaleY(.07);transform-origin:center;transition:transform .55s cubic-bezier(.3,.85,.3,1)}
 .scar .incision{fill:none;stroke:var(--ink);stroke-width:1.4;transition:opacity .4s}
@@ -66,12 +66,13 @@ body:not([data-route="home"]) .light-dot{display:none}
 .n-text .scar{width:39px}
 .n-scar .scar{width:31px}
 
-.node .cap{position:absolute;top:38px;left:50%;transform:translate(-50%,4px);font-size:10px;letter-spacing:.28em;text-transform:none;color:var(--ink);white-space:nowrap;opacity:0;transition:all .5s ease;pointer-events:none}
-.node:hover .cap{opacity:.95;transform:translate(-50%,0)}
+.node .cap{position:absolute;top:48px;left:50%;transform:translate(-50%,4px);font-size:10px;letter-spacing:.28em;text-transform:none;color:var(--ink);white-space:nowrap;opacity:.82;transition:all .5s ease;pointer-events:none}
+.node:hover .cap{opacity:1;transform:translate(-50%,0)}
 .node.n-moving{left:21%;top:27%;--rot:-34deg}
 .node.n-image{left:71%;top:45%;--rot:27deg}
 .node.n-text{left:42%;top:74%;--rot:-69deg}
 .node.n-scar{left:79%;top:24%;--rot:-23deg}
+.home-hint{position:absolute;left:34px;bottom:28px;z-index:5;font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(236,234,230,.78);text-transform:lowercase;mix-blend-mode:normal;pointer-events:none}
 
 .bgswap{position:absolute;right:30px;bottom:28px;z-index:6;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink);opacity:.4;mix-blend-mode:difference;transition:opacity .3s}
 .bgswap:hover{opacity:1}
@@ -185,7 +186,7 @@ main{padding:110px 18px 80px}
   <button class="node n-moving" data-r="moving"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.001</span></button>
   <button class="node n-image" data-r="image"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.314.33</span></button>
   <button class="node n-text" data-r="text"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.11.921.06</span></button>
-  <button class="node n-scar" data-r="scar"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">J.0098.21.3</span></button>
+  <button class="node n-scar" data-r="scar"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">J.0098.21.3</span></button>  <div class="home-hint">enter through a mark</div>
 </section>
 
 <nav class="mininav">
@@ -373,7 +374,7 @@ const r=(location.hash.replace("#/","")||"home");document.body.dataset.route=r;
 views.forEach(v=>v.classList.toggle("show",v.dataset.route===r));
 $$(".mininav button").forEach(b=>b.classList.toggle("active",b.dataset.r===r));
 peek.classList.remove("on");
-if(r==="home"){startBg();document.body.classList.remove("editing");const et=$("#editToggle");if(et)et.textContent="edit";const eb=$("#exportBtn");if(eb)eb.hidden=true;setEditable(false);$$(".node").forEach(n=>{n.classList.remove("opening");n.style.opacity=.34;const s=n.querySelector(".scar");if(s)s.classList.remove("cut","tug")})}
+if(r==="home"){startBg();document.body.classList.remove("editing");const et=$("#editToggle");if(et)et.textContent="edit";const eb=$("#exportBtn");if(eb)eb.hidden=true;setEditable(false);$$(".node").forEach(n=>{n.classList.remove("opening");n.style.opacity=.92;const s=n.querySelector(".scar");if(s)s.classList.remove("cut","tug")})}
 scrollTo(0,0);
 }
 function openCut(node){const r=node.dataset.r,s=node.querySelector(".scar");if(s)s.classList.add("cut");spawnBlood(node);flash();node.classList.add("opening");setTimeout(()=>location.hash="#/"+r,780)}
@@ -423,8 +424,8 @@ requestAnimationFrame(drawCursor);
 drawCursor();
 
 const homeNodes=$$(".node");let _idle;
-function reveal(cx,cy){if(document.body.dataset.route!=="home")return;homeNodes.forEach(n=>{const r=n.getBoundingClientRect();const d=Math.hypot(cx-(r.left+r.width/2),cy-(r.top+r.height/2));let o=d<=200?1:d>=380?0:1-(d-200)/180;n.style.opacity=o.toFixed(3)});clearTimeout(_idle);_idle=setTimeout(()=>homeNodes.forEach(n=>n.style.opacity=.34),1500)}
-if(matchMedia("(hover:hover)").matches)addEventListener("mousemove",e=>reveal(e.clientX,e.clientY),{passive:true});else homeNodes.forEach(n=>n.style.opacity=.58);
+function reveal(cx,cy){if(document.body.dataset.route!=="home")return;homeNodes.forEach(n=>{const r=n.getBoundingClientRect();const d=Math.hypot(cx-(r.left+r.width/2),cy-(r.top+r.height/2));let o=d<=200?1:d>=380?0:1-(d-200)/180;n.style.opacity=o.toFixed(3)});clearTimeout(_idle);_idle=setTimeout(()=>homeNodes.forEach(n=>n.style.opacity=.92),1500)}
+if(matchMedia("(hover:hover)").matches)addEventListener("mousemove",e=>reveal(e.clientX,e.clientY),{passive:true});else homeNodes.forEach(n=>n.style.opacity=.92);
 
 addEventListener("hashchange",route);
 route();
