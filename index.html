@@ -25,6 +25,7 @@ a{color:inherit;text-decoration:none}
 .cover{position:fixed;inset:0;z-index:1000;overflow:hidden;transition:opacity .9s ease,visibility .9s}
 body:not([data-route="home"]) .cover{opacity:0;visibility:hidden;pointer-events:none}
 .cover .static,.cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover .yt-bg{position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-width:177.78vh;min-height:100vh;transform:translate(-50%,-50%);border:0;pointer-events:none;filter:grayscale(1) contrast(1.06) brightness(.95)}
 .static canvas{width:100%;height:100%;display:block;opacity:.5}
 .cover:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,.18),rgba(0,0,0,.72))}
 
@@ -179,7 +180,7 @@ main{padding:110px 18px 80px}
 
 <section class="cover">
   <div class="static"><canvas id="snow"></canvas></div>
-  <video id="bg" src="media/cover.mp4" autoplay muted loop playsinline webkit-playsinline preload="metadata"></video>
+  <video id="bg" autoplay muted loop playsinline webkit-playsinline preload="metadata"></video>
 
   <button class="node n-moving" data-r="moving"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.001</span></button>
   <button class="node n-image" data-r="image"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.314.33</span></button>
@@ -206,7 +207,7 @@ main{padding:110px 18px 80px}
 <div class="overlay" id="overlay"><div class="x" id="ovX"></div><div id="ovContent"></div></div>
 
 <script>
-const HOME={bgVideo:""};
+const HOME={bgVideo:"https://youtu.be/8anE8LYo3fc"};
 
 const DEFAULT_CONTENT={
   moving:[
@@ -321,7 +322,26 @@ inp.click();
 }
 
 const bg=$("#bg");
-function startBg(){if(!bg.src&&HOME.bgVideo)bg.src=HOME.bgVideo;bg.play().catch(()=>{})}
+function startBg(){
+  if(!HOME.bgVideo) return;
+  const yt=youtubeEmbed(HOME.bgVideo,true);
+  if(yt){
+    if(!$("#ytBg")){
+      const f=document.createElement("iframe");
+      f.id="ytBg";
+      f.className="yt-bg";
+      f.src=yt+"&mute=1&controls=0&showinfo=0&loop=1&playlist="+youtubeId(HOME.bgVideo);
+      f.title="home video";
+      f.allow="autoplay; encrypted-media; fullscreen; picture-in-picture";
+      f.setAttribute("allowfullscreen","");
+      $(".cover").insertBefore(f,bg);
+      $(".static").style.opacity=0;
+    }
+    return;
+  }
+  if(!bg.src) bg.src=HOME.bgVideo;
+  bg.play().catch(()=>{});
+}
 bg.addEventListener("loadeddata",()=>$(".static").style.opacity=0);
 function setSwapNote(t){console.warn(t)}
 function loadBgFile(f){if(!f)return;if(f.type&&!/(mp4|webm|ogg)/i.test(f.type))setSwapNote("需 MP4/H.264");bg.src=URL.createObjectURL(f);bg.play().catch(()=>{});$(".static").style.opacity=0}
