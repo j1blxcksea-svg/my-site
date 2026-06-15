@@ -12,8 +12,8 @@
 :root{--bg:#040404;--ink:#eceae6;--dim:#777470;--faint:#3b3937;--line:rgba(236,234,230,.12);--serif:"Bodoni Moda","Noto Serif SC",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--read:"Noto Serif SC","Bodoni Moda",Georgia,serif;--blood:#5e150e}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--mono);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:auto}
-body[data-route="home"]{cursor:none}
-body[data-route="home"] .node,body[data-route="home"] .bgswap{cursor:none}
+body[data-route="home"]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 7 7'%3E%3Ccircle cx='3.5' cy='3.5' r='2' fill='rgb(236,234,230)'/%3E%3C/svg%3E") 3 3, auto}
+body[data-route="home"] .node,body[data-route="home"] .bgswap{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 7 7'%3E%3Ccircle cx='3.5' cy='3.5' r='2' fill='rgb(236,234,230)'/%3E%3C/svg%3E") 3 3, auto}
 video,img{filter:grayscale(1) contrast(1.06) brightness(.95)}
 ::selection{background:var(--ink);color:var(--bg)}
 a{color:inherit;text-decoration:none}
@@ -41,9 +41,9 @@ body:not([data-route="home"]) #cursorCanvas{display:none}
   mix-blend-mode:difference;
 }
 body:not([data-route="home"]) .light-dot{display:none}
-@media(hover:none){#cursorCanvas,.light-dot{display:none}html,body{cursor:auto}}
+@media(hover:none){#cursorCanvas,.light-dot{display:none}}
 
-.node{position:absolute;z-index:5;background:none;border:none;width:170px;height:92px;display:grid;place-items:center;mix-blend-mode:difference;opacity:.54;transition:opacity .55s ease;overflow:visible;cursor:none}
+.node{position:absolute;z-index:5;background:none;border:none;width:170px;height:92px;display:grid;place-items:center;mix-blend-mode:difference;opacity:.54;transition:opacity .55s ease;overflow:visible;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7' viewBox='0 0 7 7'%3E%3Ccircle cx='3.5' cy='3.5' r='2' fill='rgb(236,234,230)'/%3E%3C/svg%3E") 3 3, auto}
 .scar{width:34px;height:auto;overflow:visible;animation:pulse 4.6s ease-in-out infinite;transform:rotate(var(--rot,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .scar .wound{fill:#020202;stroke:var(--ink);stroke-width:1;transform:scaleY(.07);transform-origin:center;transition:transform .55s cubic-bezier(.3,.85,.3,1)}
 .scar .incision{fill:none;stroke:var(--ink);stroke-width:1.4;transition:opacity .4s}
@@ -175,21 +175,23 @@ main{padding:110px 18px 80px}
 <canvas id="cursorCanvas"></canvas>
 <div class="light-dot" id="lightDot"></div>
 
-<section class="cover">
+<section class="cover has-youtube">
   <div class="static"><canvas id="snow"></canvas></div>
+  <img id="ytPoster" class="yt-poster" src="https://i.ytimg.com/vi/8anE8LYo3fc/hqdefault.jpg" alt="">
+  <iframe id="ytBg" class="yt-bg" src="https://www.youtube.com/embed/8anE8LYo3fc?autoplay=1&mute=1&controls=0&loop=1&playlist=8anE8LYo3fc&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1" title="home video" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   <video id="bg" autoplay muted loop playsinline webkit-playsinline preload="metadata"></video>
 
-  <button class="node n-moving" data-r="moving" aria-label="moving" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.001</span></button>
-  <button class="node n-image" data-r="image" aria-label="image" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.314.33</span></button>
-  <button class="node n-text" data-r="text" aria-label="text" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.11.921.06</span></button>
-  <button class="node n-scar" data-r="scar" aria-label="scar" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">J.0098.21.3</span></button>
+  <a class="node n-moving" data-r="moving" href="#/moving" aria-label="moving"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.001</span></a>
+  <a class="node n-image" data-r="image" href="#/image" aria-label="image"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.314.33</span></a>
+  <a class="node n-text" data-r="text" href="#/text" aria-label="text"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.11.921.06</span></a>
+  <a class="node n-scar" data-r="scar" href="#/scar" aria-label="scar"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">J.0098.21.3</span></a>
 </section>
 
 <nav class="mininav">
-  <button data-r="moving"><span class="d"></span><span class="lbl">0.001</span></button>
-  <button data-r="image"><span class="d"></span><span class="lbl">0.314.33</span></button>
-  <button data-r="text"><span class="d"></span><span class="lbl">0.11.921.06</span></button>
-  <button data-r="scar"><span class="d"></span><span class="lbl">J.0098.21.3</span></button>
+  <button data-r="moving"><span class="d"></span><span class="lbl">0.001</span></a>
+  <button data-r="image"><span class="d"></span><span class="lbl">0.314.33</span></a>
+  <button data-r="text"><span class="d"></span><span class="lbl">0.11.921.06</span></a>
+  <button data-r="scar"><span class="d"></span><span class="lbl">J.0098.21.3</span></a>
 </nav>
 
 <div class="home-dot" id="homeDot" title="首页"></div>
@@ -319,38 +321,7 @@ inp.click();
 }
 
 const bg=$("#bg");
-function startBg(){
-  if(!HOME.bgVideo) return;
-  const yt=youtubeEmbed(HOME.bgVideo,true);
-  const id=youtubeId(HOME.bgVideo);
-  if(yt){
-    const cover=$('.cover');
-    cover.classList.add('has-youtube');
-    if(id && !$('#ytPoster')){
-      const poster=document.createElement('img');
-      poster.id='ytPoster';
-      poster.className='yt-poster';
-      poster.src=`https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-      poster.alt='';
-      cover.insertBefore(poster,bg);
-    }
-    if(!$('#ytBg')){
-      const f=document.createElement('iframe');
-      f.id='ytBg';
-      f.className='yt-bg';
-      f.src=yt+'&mute=1&controls=0&showinfo=0&loop=1&playlist='+id;
-      f.title='home video';
-      f.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';
-      f.setAttribute('allowfullscreen','');
-      cover.insertBefore(f,bg);
-      bg.removeAttribute('src');
-      $('.static').style.opacity=0;
-    }
-    return;
-  }
-  if(!bg.src) bg.src=HOME.bgVideo;
-  bg.play().catch(()=>{});
-}
+function startBg(){const s=$(".static");if(s)s.style.opacity=0}
 bg.addEventListener("loadeddata",()=>$(".static").style.opacity=0);
 function setSwapNote(t){console.warn(t)}
 function loadBgFile(f){if(!f)return;if(f.type&&!/(mp4|webm|ogg)/i.test(f.type))setSwapNote("需 MP4/H.264");bg.src=URL.createObjectURL(f);bg.play().catch(()=>{});$(".static").style.opacity=0}
@@ -393,7 +364,7 @@ b.innerHTML=`<svg viewBox="0 0 60 50"><circle class="pool" cx="30" cy="17" r="3.
 document.body.appendChild(b);setTimeout(()=>b.remove(),1500);
 }
 function flash(){const f=$("#flash");if(f){f.classList.remove("on");void f.offsetWidth;f.classList.add("on")}const c=$(".cover");if(c){c.classList.remove("shudder");void c.offsetWidth;c.classList.add("shudder")}setTimeout(()=>{if(f)f.classList.remove("on");if(c)c.classList.remove("shudder")},760)}
-$$(".node").forEach(node=>{node.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openCut(node)});node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCut(node)}})});
+$(".node").forEach(node=>{node.addEventListener("click",e=>{openCut(node)});node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){openCut(node)}})});
 $$(".mininav button").forEach(b=>b.addEventListener("click",()=>location.hash="#/"+b.dataset.r));
 $("#homeDot").addEventListener("click",()=>location.hash="");
 
