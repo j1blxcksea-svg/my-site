@@ -43,7 +43,7 @@ body:not([data-route="home"]) #cursorCanvas{display:none}
 body:not([data-route="home"]) .light-dot{display:none}
 @media(hover:none){#cursorCanvas,.light-dot{display:none}html,body{cursor:auto}}
 
-.node{position:absolute;z-index:5;background:none;border:none;width:54px;height:54px;display:grid;place-items:center;mix-blend-mode:difference;opacity:.48;transition:opacity .55s ease;overflow:visible;cursor:none}
+.node{position:absolute;z-index:5;background:none;border:none;width:170px;height:92px;display:grid;place-items:center;mix-blend-mode:difference;opacity:.54;transition:opacity .55s ease;overflow:visible;cursor:none}
 .scar{width:34px;height:auto;overflow:visible;animation:pulse 4.6s ease-in-out infinite;transform:rotate(var(--rot,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .scar .wound{fill:#020202;stroke:var(--ink);stroke-width:1;transform:scaleY(.07);transform-origin:center;transition:transform .55s cubic-bezier(.3,.85,.3,1)}
 .scar .incision{fill:none;stroke:var(--ink);stroke-width:1.4;transition:opacity .4s}
@@ -63,12 +63,12 @@ body:not([data-route="home"]) .light-dot{display:none}
 .n-text .scar{width:39px}
 .n-scar .scar{width:31px}
 
-.node .cap{position:absolute;top:48px;left:50%;transform:translate(-50%,4px);font-size:10px;letter-spacing:.28em;text-transform:none;color:var(--ink);white-space:nowrap;opacity:.82;transition:all .5s ease;pointer-events:auto}
+.node .cap{position:absolute;top:62px;left:50%;transform:translate(-50%,0);font-size:10px;letter-spacing:.28em;text-transform:none;color:var(--ink);white-space:nowrap;opacity:.86;transition:all .5s ease;pointer-events:none}
 .node:hover .cap{opacity:1;transform:translate(-50%,0)}
-.node.n-moving{left:21%;top:27%;--rot:-34deg}
-.node.n-image{left:71%;top:45%;--rot:27deg}
-.node.n-text{left:42%;top:74%;--rot:-69deg}
-.node.n-scar{left:79%;top:24%;--rot:-23deg}
+.node.n-moving{left:17%;top:23%;--rot:-34deg}
+.node.n-image{left:67%;top:41%;--rot:27deg}
+.node.n-text{left:38%;top:70%;--rot:-69deg}
+.node.n-scar{left:73%;top:20%;--rot:-23deg}
 
 .bgswap{position:absolute;right:30px;bottom:28px;z-index:6;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--ink);opacity:.4;mix-blend-mode:difference;transition:opacity .3s}
 .bgswap:hover{opacity:1}
@@ -179,10 +179,10 @@ main{padding:110px 18px 80px}
   <div class="static"><canvas id="snow"></canvas></div>
   <video id="bg" autoplay muted loop playsinline webkit-playsinline preload="metadata"></video>
 
-  <button class="node n-moving" data-r="moving"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.001</span></button>
-  <button class="node n-image" data-r="image"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.314.33</span></button>
-  <button class="node n-text" data-r="text"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.11.921.06</span></button>
-  <button class="node n-scar" data-r="scar"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">J.0098.21.3</span></button>
+  <button class="node n-moving" data-r="moving" aria-label="moving" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.001</span></button>
+  <button class="node n-image" data-r="image" aria-label="image" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.314.33</span></button>
+  <button class="node n-text" data-r="text" aria-label="text" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">0.11.921.06</span></button>
+  <button class="node n-scar" data-r="scar" aria-label="scar" type="button"><svg class="scar" viewBox="0 0 44 24"></svg><span class="cap">J.0098.21.3</span></button>
 </section>
 
 <nav class="mininav">
@@ -330,7 +330,7 @@ function startBg(){
       const poster=document.createElement('img');
       poster.id='ytPoster';
       poster.className='yt-poster';
-      poster.src=`https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+      poster.src=`https://img.youtube.com/vi/${id}/hqdefault.jpg`;
       poster.alt='';
       cover.insertBefore(poster,bg);
     }
@@ -383,7 +383,7 @@ peek.classList.remove("on");
 if(r==="home"){startBg();document.body.classList.remove("editing");const et=$("#editToggle");if(et)et.textContent="edit";const eb=$("#exportBtn");if(eb)eb.hidden=true;setEditable(false);$$(".node").forEach(n=>{n.classList.remove("opening");n.style.opacity=.48;const s=n.querySelector(".scar");if(s)s.classList.remove("cut","tug")})}
 scrollTo(0,0);
 }
-function openCut(node){const r=node.dataset.r,s=node.querySelector(".scar");if(s)s.classList.add("cut");spawnBlood(node);flash();node.classList.add("opening");setTimeout(()=>location.hash="#/"+r,780)}
+function openCut(node){const r=node.dataset.r,s=node.querySelector(".scar");if(s)s.classList.add("cut");spawnBlood(node);flash();node.classList.add("opening");location.hash="#/"+r}
 function spawnBlood(node){
 const rc=node.getBoundingClientRect();
 const b=document.createElement("span");b.className="blood";
@@ -393,7 +393,7 @@ b.innerHTML=`<svg viewBox="0 0 60 50"><circle class="pool" cx="30" cy="17" r="3.
 document.body.appendChild(b);setTimeout(()=>b.remove(),1500);
 }
 function flash(){const f=$("#flash");if(f){f.classList.remove("on");void f.offsetWidth;f.classList.add("on")}const c=$(".cover");if(c){c.classList.remove("shudder");void c.offsetWidth;c.classList.add("shudder")}setTimeout(()=>{if(f)f.classList.remove("on");if(c)c.classList.remove("shudder")},760)}
-$$(".node").forEach(node=>node.addEventListener("click",()=>openCut(node)));
+$$(".node").forEach(node=>{node.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openCut(node)});node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCut(node)}})});
 $$(".mininav button").forEach(b=>b.addEventListener("click",()=>location.hash="#/"+b.dataset.r));
 $("#homeDot").addEventListener("click",()=>location.hash="");
 
@@ -403,7 +403,7 @@ const dot=$("#lightDot"),cursorCanvas=$("#cursorCanvas"),ctx=cursorCanvas.getCon
 let mx=-200,my=-200,px=-200,py=-200,trails=[];
 function resizeCursor(){cursorCanvas.width=innerWidth*devicePixelRatio;cursorCanvas.height=innerHeight*devicePixelRatio;cursorCanvas.style.width=innerWidth+"px";cursorCanvas.style.height=innerHeight+"px";ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
 resizeCursor();addEventListener("resize",resizeCursor);
-if(dot&&matchMedia("(hover:hover)").matches){
+if(dot){
 addEventListener("mousemove",e=>{
 px=mx;py=my;mx=e.clientX;my=e.clientY;
 dot.style.transform=`translate(${mx-2}px,${my-2}px)`;
