@@ -1,0 +1,78 @@
+{
+  "moving": [
+    {
+      "id": "01",
+      "title": "未命名 I",
+      "titleEn": "Untitled I",
+      "year": "2025",
+      "runtime": "14:20",
+      "src": "media/work-01.mp4"
+    },
+    {
+      "id": "02",
+      "title": "未命名 II",
+      "titleEn": "Untitled II",
+      "year": "2024",
+      "runtime": "08:45",
+      "src": "media/work-02.mp4"
+    },
+    {
+      "id": "03",
+      "title": "未命名 III",
+      "titleEn": "Untitled III",
+      "year": "2024",
+      "runtime": "22:10",
+      "src": "media/work-03.mp4"
+    },
+    {
+      "id": "04",
+      "title": "未命名 IV",
+      "titleEn": "Untitled IV",
+      "year": "2023",
+      "runtime": "05:30",
+      "src": "media/work-04.mp4"
+    }
+  ],
+  "image": [
+    {
+      "id": "01",
+      "title": "系列 I",
+      "titleEn": "Series I",
+      "year": "2025",
+      "src": "media/img-01.jpg"
+    },
+    {
+      "id": "02",
+      "title": "系列 II",
+      "titleEn": "Series II",
+      "year": "2024",
+      "src": "media/img-02.jpg"
+    },
+    {
+      "id": "03",
+      "title": "系列 III",
+      "titleEn": "Series III",
+      "year": "2023",
+      "src": "media/img-03.jpg"
+    }
+  ],
+  "text": [
+    {
+      "title": "被翻译的主体",
+      "date": "2025",
+      "body": "在这里粘贴你的文字。\n\n空一行即换段。点击标题在阅读层中展开。"
+    },
+    {
+      "title": "未命名",
+      "date": "2024",
+      "body": "……"
+    }
+  ],
+  "scar": [
+    {
+      "title": "J.0098.21.3",
+      "date": "",
+      "body": "在这里放置 J.0098.21.3 对应的文字、档案、图像说明或项目描述。"
+    }
+  ]
+}

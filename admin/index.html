@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Jingluo Admin</title>
+</head>
+<body>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    (function(){
+      function hasIdentityToken(){
+        return /(?:invite_token|confirmation_token|recovery_token|access_token)=/.test(location.hash || location.search);
+      }
+      function openIdentityWhenReady(){
+        if(!window.netlifyIdentity) return setTimeout(openIdentityWhenReady, 100);
+        window.netlifyIdentity.on("init", function(){
+          if(hasIdentityToken()) window.netlifyIdentity.open();
+        });
+        if(hasIdentityToken()) setTimeout(function(){ window.netlifyIdentity.open(); }, 600);
+      }
+      openIdentityWhenReady();
+    })();
+  </script>
+</body>
+</html>

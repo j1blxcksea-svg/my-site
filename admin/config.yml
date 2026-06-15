@@ -1,0 +1,55 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "media"
+public_folder: "media"
+
+collections:
+  - name: "site_content"
+    label: "网站内容"
+    files:
+      - name: "works"
+        label: "作品列表"
+        file: "content/works.json"
+        format: "json"
+        fields:
+          - label: "影像作品"
+            name: "moving"
+            widget: "list"
+            summary: "{{fields.id}} · {{fields.title}}"
+            fields:
+              - { label: "编号", name: "id", widget: "string" }
+              - { label: "中文标题", name: "title", widget: "string" }
+              - { label: "英文标题", name: "titleEn", widget: "string", required: false }
+              - { label: "年份", name: "year", widget: "string", required: false }
+              - { label: "时长", name: "runtime", widget: "string", required: false }
+              - { label: "视频链接（可填 YouTube 链接）", name: "src", widget: "string", required: false, hint: "例如 https://youtu.be/xxxx 或 media/work.mp4" }
+          - label: "图片作品"
+            name: "image"
+            widget: "list"
+            summary: "{{fields.id}} · {{fields.title}}"
+            fields:
+              - { label: "编号", name: "id", widget: "string" }
+              - { label: "中文标题", name: "title", widget: "string" }
+              - { label: "英文标题", name: "titleEn", widget: "string", required: false }
+              - { label: "年份", name: "year", widget: "string", required: false }
+              - { label: "图片链接（建议用 Cloudinary 或其他图床链接）", name: "src", widget: "string", required: false, hint: "例如 https://...jpg 或 https://...webp" }
+          - label: "文字"
+            name: "text"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "标题", name: "title", widget: "string" }
+              - { label: "日期", name: "date", widget: "string", required: false }
+              - { label: "正文", name: "body", widget: "markdown", required: false }
+          - label: "J.0098.21.3"
+            name: "scar"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "标题", name: "title", widget: "string" }
+              - { label: "日期", name: "date", widget: "string", required: false }
+              - { label: "正文", name: "body", widget: "markdown", required: false }
