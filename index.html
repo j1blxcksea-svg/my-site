@@ -400,7 +400,7 @@ b.innerHTML=`<svg viewBox="0 0 60 50"><circle class="pool" cx="30" cy="17" r="3.
 document.body.appendChild(b);setTimeout(()=>b.remove(),1500);
 }
 function flash(){const f=$("#flash");if(f){f.classList.remove("on");void f.offsetWidth;f.classList.add("on")}const c=$(".cover");if(c){c.classList.remove("shudder");void c.offsetWidth;c.classList.add("shudder")}setTimeout(()=>{if(f)f.classList.remove("on");if(c)c.classList.remove("shudder")},760)}
-$(".node").forEach(node=>{node.addEventListener("click",e=>{openCut(node)});node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){openCut(node)}})});
+$$(".node").forEach(node=>{node.addEventListener("click",e=>{openCut(node)});node.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){openCut(node)}})});
 $$(".mininav button").forEach(b=>b.addEventListener("click",()=>location.hash="#/"+b.dataset.r));
 $("#homeDot").addEventListener("click",()=>location.hash="");
 
