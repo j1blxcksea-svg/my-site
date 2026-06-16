@@ -327,10 +327,6 @@ bg.addEventListener("error",()=>setSwapNote("无法播放此格式"));
 const cover=$(".cover");
 function cleanHomeVideoUrl(src){
 const url=String(src||"").trim();
-if(!url)return "";
-if(/res\.cloudinary\.com\/.+\/video\/upload\//.test(url)&&!/\/video\/upload\/[^/]*q_auto/.test(url)){
-return url.replace("/video/upload/","/video/upload/q_auto:best,vc_h264/");
-}
 return url;
 }
 async function loadSite(){
@@ -360,7 +356,9 @@ if(bg.src)bg.play().catch(()=>{});
 if(bg.readyState>=2)cover.classList.add("video-ready");
 }
 bg.addEventListener("loadeddata",()=>cover.classList.add("video-ready"));
+bg.addEventListener("loadedmetadata",()=>cover.classList.add("video-ready"));
 bg.addEventListener("canplay",()=>{cover.classList.add("video-ready");bg.play().catch(()=>{})});
+bg.addEventListener("canplaythrough",()=>{cover.classList.add("video-ready");bg.play().catch(()=>{})});
 bg.addEventListener("error",()=>{cover.classList.remove("video-ready");setSwapNote("Cannot play this home video URL")});
 loadSite();
 
