@@ -1,11 +1,30 @@
 backend:
   name: git-gateway
+
 local_backend: true
 
 media_folder: "media"
 public_folder: "media"
 
 collections:
+  - name: "site_settings"
+    label: "首页设置"
+    files:
+      - name: "home"
+        label: "首页视频"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          - label: "首页视频 MP4 直链"
+            name: "homeVideo"
+            widget: "string"
+            required: false
+            hint: "粘贴 Cloudinary / Vimeo / Cloudflare 等服务生成的直接 MP4 链接。不要用 YouTube 链接做首页背景，否则会出现播放按钮和加载控件。"
+          - label: "备注"
+            name: "note"
+            widget: "text"
+            required: false
+
   - name: "site_content"
     label: "网站内容"
     files:
@@ -24,7 +43,8 @@ collections:
               - { label: "英文标题", name: "titleEn", widget: "string", required: false }
               - { label: "年份", name: "year", widget: "string", required: false }
               - { label: "时长", name: "runtime", widget: "string", required: false }
-              - { label: "视频链接（可填 YouTube 链接）", name: "src", widget: "string", required: false, hint: "例如 https://youtu.be/xxxx 或 media/work.mp4" }
+              - { label: "视频链接", name: "src", widget: "string", required: false, hint: "作品详情页可以用 YouTube 链接；如果想要更干净，也可以用 MP4/CDN 链接。" }
+
           - label: "图片作品"
             name: "image"
             widget: "list"
@@ -34,7 +54,8 @@ collections:
               - { label: "中文标题", name: "title", widget: "string" }
               - { label: "英文标题", name: "titleEn", widget: "string", required: false }
               - { label: "年份", name: "year", widget: "string", required: false }
-              - { label: "图片链接（建议用 Cloudinary 或其他图床链接）", name: "src", widget: "string", required: false, hint: "例如 https://...jpg 或 https://...webp" }
+              - { label: "图片链接", name: "src", widget: "string", required: false, hint: "建议用 Cloudinary 或其他图床链接，例如 https://...jpg / https://...webp。" }
+
           - label: "文字"
             name: "text"
             widget: "list"
@@ -43,6 +64,7 @@ collections:
               - { label: "标题", name: "title", widget: "string" }
               - { label: "日期", name: "date", widget: "string", required: false }
               - { label: "正文", name: "body", widget: "markdown", required: false }
+
           - label: "J.0098.21.3"
             name: "scar"
             widget: "list"
